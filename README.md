@@ -10,5 +10,26 @@ People hosting there own cloud or storage and missing a quick view of there pict
 
 ### how do i install?
 ```
-git clone 
+git clone https://github.com/cybertim/cronthumb.git
+cd cronthumb
+npm install
+cp src/config.example.coffee src/config.coffee
+```
+Now edit the config.coffee and put in your own picture/photo folders.
+After this you can run the script with the following commands:
+```
+npm run app
+```
+or if you have a global coffee-script install
+```
+coffee src/run.coffee
+```
+
+### running it as a cronjob?
+```
+crontab -e
+```
+And put in this line to run it each hour:
+```
+0 * * * * /path/to/cronthumb/cron.sh
 ```
