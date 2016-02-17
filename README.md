@@ -1,6 +1,6 @@
 # cronthumb
 
-### what does it do
+### what does it do?
 It's a nodejs based script which can be used to generate thumbnails for folders filled with picture.
 You can configure the sub-folder where the thumbs are stored and a nice index.html based on freewall.js will be put in the folder as the new index.
 The script does incremental updates, it can be put into your crontab (ex. each hour) so if you auto-upload pictures to your server it will update the gallery/index accordingly.
@@ -23,13 +23,4 @@ npm run app
 or if you have a global coffee-script install
 ```
 coffee src/run.coffee
-```
-
-### running it as a cronjob?
-```
-crontab -e
-```
-And put in this line to run it each hour:
-```
-0 * * * * /path/to/cronthumb/cron.sh
 ```
