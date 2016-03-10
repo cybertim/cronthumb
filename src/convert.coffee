@@ -39,7 +39,8 @@ process = (path) ->
 
 # convert a thumb entry
 convert = (path, filename) ->
-  thumbfile = path + config.photo_thumb_folder + config.photo_thumb_prefix + filename
+  thumbpath = get_thumbpath(path)
+  thumbfile = thumbpath + config.photo_thumb_prefix + filename
   try
     stat = fs.statSync thumbfile
   catch error
@@ -52,12 +53,7 @@ orig = (z) ->
   z.substring(config.photo_thumb_prefix.length)
 
 page = (path) ->
-  thumbpath = path + config.photo_thumb_folder
-  try
-    stat = fs.statSync thumbpath
-  catch err
-    fs.mkdirSync thumbpath
-    console.log 'created ' + config.photo_thumb_folder + ' folder @ ' + path
+  thumbpath = get_thumbpath(path)
   html = "<html><head>"
   html += "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js\"></script>"
   html += "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/freewall/1.0.5/freewall.min.js\"></script>"
@@ -84,6 +80,15 @@ page = (path) ->
   html += "</script></body></html>"
   fs.writeFileSync path + config.photo_thumb_gallery, html
   console.log config.photo_thumb_gallery + ' written @ ' + path
+
+get_thumbpath = (path) ->
+  thumbpath = path + config.photo_thumb_folder
+  try
+    stat = fs.statSync thumbpath
+  catch err
+    fs.mkdirSync thumbpath
+    console.log 'created ' + config.photo_thumb_folder + ' folder @ ' + path
+  return thumbpath
 
 module.exports = {
   run: update
